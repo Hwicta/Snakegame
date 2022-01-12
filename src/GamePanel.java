@@ -118,7 +118,7 @@ public class GamePanel extends JPanel implements ActionListener {
 		appleX = random.nextInt((int) (SCREEN_WIDTH / UNIT_SIZE)) * UNIT_SIZE;
 		appleY = random.nextInt((int) (SCREEN_HEIGHT / UNIT_SIZE)) * UNIT_SIZE;
 	}
-
+      // omenan tarkitus
 	public void checkApple() {
 		if ((x[0] == appleX) && (y[0] == appleY)) {
 			bodyparts++;
