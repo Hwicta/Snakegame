@@ -9,6 +9,13 @@ import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class GamePanel extends JPanel implements ActionListener {
+	
+	
+	// mainmenu
+	// retry
+	// highscore
+	// difficulty
+	// more bonus objects
 
 	static final int SCREEN_WIDTH = 800;
 	static final int SCREEN_HEIGHT = 800;
@@ -27,14 +34,9 @@ public class GamePanel extends JPanel implements ActionListener {
 	boolean running = false;
 	Timer timer;
 	Random random;
+	// generate a random random number for the 2x apple
 	int randomNum = ThreadLocalRandom.current().nextInt(1, 10);
 
-	private enum STATE{
-		MENU,
-		GAME,
-	};
-	
-	private STATE State = STATE.MENU;
 	
 	GamePanel() {
 			
@@ -82,6 +84,7 @@ public class GamePanel extends JPanel implements ActionListener {
 			FontMetrics metrics = getFontMetrics(g.getFont());
 			g.drawString("Pisteet: " + applesEaten, (SCREEN_WIDTH - metrics.stringWidth("Pisteet: " + applesEaten)) / 2,
 					g.getFont().getSize());
+			// creating grapics for the 2x apples
 			if ((applesEaten == randomNum) && (applesEaten > 0)) {
 				g.setColor(Color.blue);
 				g.fillOval(speedX, speedY, UNIT_SIZE, UNIT_SIZE);
@@ -124,27 +127,23 @@ public class GamePanel extends JPanel implements ActionListener {
 			bodyparts++;
 			applesEaten++;
 			newApple();
+			// spawns 2x apple
 			if(applesEaten == randomNum) {
 				speedX = random.nextInt((int) (SCREEN_WIDTH / UNIT_SIZE)) * UNIT_SIZE;
 				speedY = random.nextInt((int) (SCREEN_HEIGHT / UNIT_SIZE)) * UNIT_SIZE;
 			}
-					
+					// Rolls another random number when normal apple is eaten while 2x on screen
 			if(applesEaten > randomNum) {
 				speedX = -1;
 				speedY = -1;
 				randomNum = ThreadLocalRandom.current().nextInt((applesEaten + 1), (applesEaten + 10));
 			}
-			
-            // jos syö normaalin omenan arvottava uusi 2x omena, mutta ei saa arpoa joka
-			// kerta
+
 		}
 
 	}
 
-	public void newSpeed() {
-			
-	}
-
+      // 2x apple function
 	public void checkSpeed() {
 		if ((x[0] == speedX) && (y[0] == speedY)) {
 			speedX = -1;
@@ -153,7 +152,7 @@ public class GamePanel extends JPanel implements ActionListener {
 			applesEaten++;
 			applesEaten++;
 			randomNum = ThreadLocalRandom.current().nextInt((applesEaten + 1), (applesEaten + 10));
-			newSpeed();
+
 		}
 
 	}
